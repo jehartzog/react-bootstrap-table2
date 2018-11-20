@@ -8,7 +8,11 @@ import { DRAG_TYPES } from '../const';
     drop(props, monitor, component) {
         const item = monitor.getItem();
         item.onDragDrop(item.index, props.index);
-    }
+    },
+    // hover(props, monitor, component) {
+    //     const item = monitor.getItem();
+    //     item.onDragHover(item.index, props.index);
+    // }
   };
 
   function collectTarget(connect, monitor) {
