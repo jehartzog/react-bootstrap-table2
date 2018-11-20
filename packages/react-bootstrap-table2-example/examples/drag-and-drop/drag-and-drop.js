@@ -1,17 +1,17 @@
 import React from 'react';
 /* eslint-disable */
-import { DragSource, DropTarget, DragDropContextProvider } from 'react-dnd';
+import { DragDropContextProvider } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend'
 
 import BootstrapTable from 'react-bootstrap-table-next';
-import dragFactory, { DragButton, DragTarget } from '../../../react-bootstrap-table2-drag';
+import dragFactory, { DragCell } from '../../../react-bootstrap-table2-drag';
 import Code from 'components/common/code-block';
 import { productsGenerator } from 'utils/common';
 
 const products = productsGenerator();
 
 const dragFormatter = (cell, row, rowIndex, extraData) => {
-    return <DragTarget index={rowIndex}><DragButton index={rowIndex}/></DragTarget>;
+    return <DragCell index={rowIndex} />;
 };
 
 const columns = [{

@@ -1,5 +1,6 @@
 import DragButton from './src/components/drag-button';
 import DragTarget from './src/components/drag-target';
+import DragCell from './src/components/drag-cell';
 import createContext from './src/context';
 
 export default (options = {}) => ({
@@ -9,5 +10,6 @@ export default (options = {}) => ({
 
 export {
   DragButton,
-  DragTarget
+  DragTarget,
+  DragCell
 };
