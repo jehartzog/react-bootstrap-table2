@@ -19,9 +19,9 @@ import { DRAG_TYPES } from '../const';
     };
   }
 
-const Target = ({ connectDropTarget }) => {
+const Target = ({ connectDropTarget, children }) => {
     return connectDropTarget(
-        <div>TARGET</div>
+        <div>{children}</div>
     );
 }
 

@@ -11,7 +11,7 @@ import { productsGenerator } from 'utils/common';
 const products = productsGenerator();
 
 const dragFormatter = (cell, row, rowIndex, extraData) => {
-    return <div><DragButton index={rowIndex}/><DragTarget index={rowIndex}/></div>;
+    return <DragTarget index={rowIndex}><DragButton index={rowIndex}/></DragTarget>;
 };
 
 const columns = [{
