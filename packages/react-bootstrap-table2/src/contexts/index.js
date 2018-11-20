@@ -40,7 +40,8 @@ const withContext = Base =>
       }
 
       if (props.drag) {
-        this.DragContext = props.drag.createContext();
+        this.DragContext = props.drag.createContext(
+          _);
       }
 
       if (props.pagination) {
@@ -244,6 +245,7 @@ const withContext = Base =>
       return rootProps => (
         <this.DragContext.Provider
           { ...baseProps }
+          drag={ this.props.drag }
           data={ rootProps.getData() }
         >
           { base(rootProps) }

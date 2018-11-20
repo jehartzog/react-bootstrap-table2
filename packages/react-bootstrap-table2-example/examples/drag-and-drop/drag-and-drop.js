@@ -14,6 +14,14 @@ const dragFormatter = (cell, row, rowIndex, extraData) => {
     return <DragCell index={rowIndex} />;
 };
 
+const handleDrag = (fromIndex, toIndex) => {
+
+};
+
+const drag = dragFactory({ 
+  afterDragDrop: handleDrag,
+});
+
 const columns = [{
   dataField: 'id',
   text: 'Product ID'
@@ -29,7 +37,6 @@ const columns = [{
   isDummyField: true,
   formatter: dragFormatter
 }];
-
 
 const sourceCode = `\
 import BootstrapTable from 'react-bootstrap-table-next';
@@ -51,7 +58,7 @@ const columns = [{
 export default () => (
   <div>
       <DragDropContextProvider backend={HTML5Backend}>
-        <BootstrapTable keyField="id" data={ products } columns={ columns } drag={dragFactory()} />
+        <BootstrapTable keyField="id" data={ products } columns={ columns } drag={drag} />
       </DragDropContextProvider>
     <Code>{ sourceCode }</Code>
   </div>
