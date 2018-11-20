@@ -4,15 +4,11 @@ import { DragDropContextProvider } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend'
 
 import BootstrapTable from 'react-bootstrap-table-next';
-import dragFactory, { DragCell } from '../../../react-bootstrap-table2-drag';
+import dragFactory, { dragFormatter } from '../../../react-bootstrap-table2-drag';
 import Code from 'components/common/code-block';
 import { productsGenerator } from 'utils/common';
 
 const products = productsGenerator();
-
-const dragFormatter = (cell, row, rowIndex, extraData) => {
-    return <DragCell index={rowIndex} />;
-};
 
 const handleDrag = (fromIndex, toIndex) => {
   console.log(`Move row index ${fromIndex} to index ${toIndex}`);
