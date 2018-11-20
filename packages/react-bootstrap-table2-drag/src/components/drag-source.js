@@ -37,7 +37,7 @@ function collectSource(connect, monitor) {
 
 const Source = ({ isDragging, connectDragSource, children }) => {
   return connectDragSource(
-    <div style={{ opacity: isDragging ? 0.5 : 1 }}>
+    <div>
       {children}
     </div>
   );
