@@ -1,4 +1,5 @@
 import DragButton from './src/components/drag-button';
+import DragTarget from './src/components/drag-target';
 import createContext from './src/context';
 
 export default (options = {}) => ({
@@ -7,5 +8,6 @@ export default (options = {}) => ({
 });
 
 export {
-  DragButton
+  DragButton,
+  DragTarget
 };

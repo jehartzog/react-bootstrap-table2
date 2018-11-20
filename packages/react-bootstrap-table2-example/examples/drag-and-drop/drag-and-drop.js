@@ -4,39 +4,16 @@ import { DragSource, DropTarget, DragDropContextProvider } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend'
 
 import BootstrapTable from 'react-bootstrap-table-next';
-import dragFactory, { DragButton } from '../../../react-bootstrap-table2-drag';
+import dragFactory, { DragButton, DragTarget } from '../../../react-bootstrap-table2-drag';
 import Code from 'components/common/code-block';
 import { productsGenerator } from 'utils/common';
 
 const products = productsGenerator();
 
 
-  const target = {
-    drop(props, monitor, component) {
-        console.log('dropped into target', props, monitor, component);
-        const item = monitor.getItem();
-    }
-  };
-
-  function collectTarget(connect, monitor) {
-    return {
-      // Call this function inside render()
-      // to let React DnD handle the drag events:
-      connectDropTarget: connect.dropTarget(),
-    };
-  }
-
-const Target = ({ connectDropTarget, text }) => {
-    return connectDropTarget(
-        <div>{text}</div>
-    );
-}
-
-const WrappedTarget = DropTarget('ROW', target, collectTarget)(Target);
-
 const dragFormatter = (cell, row, rowIndex, extraData) => {
     console.log(cell, row, rowIndex, extraData);
-    return <div><DragButton text="X"/><WrappedTarget text="Y" /></div>;
+    return <div><DragButton text="X"/><DragTarget text="Y" /></div>;
 };
 
 const columns = [{
