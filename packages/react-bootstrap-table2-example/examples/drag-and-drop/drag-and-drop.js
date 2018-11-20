@@ -14,6 +14,7 @@ const products = productsGenerator();
   const target = {
     drop(props, monitor, component) {
         console.log('dropped into target', props, monitor, component);
+        const item = monitor.getItem();
     }
   };
 
@@ -35,7 +36,7 @@ const WrappedTarget = DropTarget('ROW', target, collectTarget)(Target);
 
 const dragFormatter = (cell, row, rowIndex, extraData) => {
     console.log(cell, row, rowIndex, extraData);
-    return <div><DragButton text="X" /><WrappedTarget text="Y" /></div>;
+    return <div><DragButton text="X"/><WrappedTarget text="Y" /></div>;
 };
 
 const columns = [{

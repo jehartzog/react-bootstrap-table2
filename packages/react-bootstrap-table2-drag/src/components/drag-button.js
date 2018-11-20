@@ -10,9 +10,10 @@ import { Consumer } from '../context';
  */
 const source = {
   beginDrag(props) {
-      console.log('started drag');
+      console.log('started drag', props);
     return {
-      text: props.text
+      text: props.text,
+      onDragDrop: props.onDragDrop,
     };
   },
   endDrag(props, monitor, component) {
@@ -23,7 +24,8 @@ const source = {
       // When dropped on a compatible target, do something
       const item = monitor.getItem();
       const dropResult = monitor.getDropResult();
-      console.log('dropped from source',item, dropResult);
+      console.log('dropped from source',props, item, dropResult);
+      // props.onDragDrop();
     }
 };
 
@@ -34,22 +36,21 @@ function collectSource(connect, monitor) {
   };
 }
 
-const Source = ({ isDragging, connectDragSource, connectDropTarget, text }) => {
-  console.log(Consumer);
+const Source = ({ isDragging, connectDragSource, text, onDragDrop }) => {
   return connectDragSource(
     <div style={{ opacity: isDragging ? 0.5 : 1 }}>
-      <Consumer>
-        { ({ onDragDrop }) => <p onClick={onDragDrop}>Thing</p> }
-      </Consumer>
+        <p onClick={onDragDrop}>{text}</p>
     </div>
   );
 }
 
-const ProvideContext = (
+const WrappedSource = DragSource(DRAG_TYPES.ROW, source, collectSource)(Source);
+
+const ProvideContext = props => (
   <Consumer>
-    <Source />
+    { ({ onDragDrop }) => <WrappedSource onDragDrop={onDragDrop} {...props}/> }
   </Consumer>
 );
 
 // Export the wrapped component:
-export default DragSource(DRAG_TYPES.ROW, source, collectSource)(Source);
+export default ProvideContext;
