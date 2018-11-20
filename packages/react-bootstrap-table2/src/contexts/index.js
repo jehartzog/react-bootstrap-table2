@@ -39,6 +39,10 @@ const withContext = Base =>
           _, this.isRemoteFiltering, this.handleRemoteFilterChange);
       }
 
+      if (props.drag) {
+        this.DragContext = props.drag.createContext();
+      }
+
       if (props.pagination) {
         this.PaginationContext = props.pagination.createContext(
           this.isRemotePagination, this.handleRemotePageChange);
@@ -236,6 +240,17 @@ const withContext = Base =>
       );
     }
 
+    renderWithDragCtx(base, baseProps) {
+      return rootProps => (
+        <this.DragContext.Provider
+          { ...baseProps }
+          data={ rootProps.getData() }
+        >
+          { base(rootProps) }
+        </this.DragContext.Provider>
+      );
+    }
+
     renderWithCellEditCtx(base, baseProps) {
       return rootProps => (
         <this.CellEditContext.Provider
@@ -278,6 +293,10 @@ const withContext = Base =>
 
       if (this.FilterContext) {
         base = this.renderWithFilterCtx(base, baseProps);
+      }
+
+      if (this.DragContext) {
+        base = this.renderWithDragCtx(base, baseProps);
       }
 
       if (this.CellEditContext) {

@@ -4,6 +4,7 @@ import { DragSource, DropTarget, DragDropContextProvider } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend'
 
 import BootstrapTable from 'react-bootstrap-table-next';
+import dragFactory from '../../../react-bootstrap-table2-drag';
 import Code from 'components/common/code-block';
 import { productsGenerator } from 'utils/common';
 
@@ -66,7 +67,8 @@ const Target = ({ connectDropTarget, text }) => {
 const WrappedSource = DragSource('CONST', source, collectSource)(Source);
 const WrappedTarget = DropTarget('CONST', target, collectTarget)(Target);
 
-const dragFormatter = (cell, row, rowIndex) => {
+const dragFormatter = (cell, row, rowIndex, extraData) => {
+    console.log(cell, row, rowIndex, extraData);
     return <div><WrappedSource text="X" /><WrappedTarget text="Y" /></div>;
 };
 
@@ -107,7 +109,7 @@ const columns = [{
 export default () => (
   <div>
       <DragDropContextProvider backend={HTML5Backend}>
-        <BootstrapTable keyField="id" data={ products } columns={ columns } />
+        <BootstrapTable keyField="id" data={ products } columns={ columns } drag={dragFactory()} />
       </DragDropContextProvider>
     <Code>{ sourceCode }</Code>
   </div>
