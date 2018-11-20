@@ -14,17 +14,17 @@ export default (
             data: PropTypes.array.isRequired,
             columns: PropTypes.array.isRequired,
             children: PropTypes.node.isRequired,
-            options: PropTypes.shape({
+            drag: PropTypes.shape({
+              options: PropTypes.shape({
                 afterDragDrop: PropTypes.func,
-              })
+              }),
+            })
         }
 
         handleDragDrop = (fromIndex, toIndex) => {
-            console.log('CALLED', fromIndex, toIndex);
-            console.log(this.props);
-            // const { afterDragDrop } = this.props.options;
+            const { afterDragDrop } = this.props.drag.options;
             // this.props.options.afterDragDrop(fromIndex, toIndex);
-            // if (_.isFunction(afterDragDrop)) afterDragDrop(fromIndex, toIndex);
+            if (_.isFunction(afterDragDrop)) afterDragDrop(fromIndex, toIndex);
         }
 
         render() {
