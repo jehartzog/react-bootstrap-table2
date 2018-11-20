@@ -6,9 +6,8 @@ import { DRAG_TYPES } from '../const';
 /* eslint-disable */
   const target = {
     drop(props, monitor, component) {
-        console.log('dropped into target', props, monitor, component);
         const item = monitor.getItem();
-        console.log('moo', item);
+        item.onDragDrop(item.index, props.index);
     }
   };
 
@@ -20,9 +19,9 @@ import { DRAG_TYPES } from '../const';
     };
   }
 
-const Target = ({ connectDropTarget, text }) => {
+const Target = ({ connectDropTarget }) => {
     return connectDropTarget(
-        <div>{text}</div>
+        <div>TARGET</div>
     );
 }
 

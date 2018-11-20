@@ -14,8 +14,8 @@ export default () => {
             children: PropTypes.node.isRequired,
         }
 
-        handleDragDrop = opts => {
-            console.log('CALLED', opts);
+        handleDragDrop = (fromIndex, toIndex) => {
+            console.log('CALLED', fromIndex, toIndex);
         }
 
         render() {

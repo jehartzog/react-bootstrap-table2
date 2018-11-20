@@ -10,10 +10,8 @@ import { productsGenerator } from 'utils/common';
 
 const products = productsGenerator();
 
-
 const dragFormatter = (cell, row, rowIndex, extraData) => {
-    console.log(cell, row, rowIndex, extraData);
-    return <div><DragButton text="X"/><DragTarget text="Y" /></div>;
+    return <div><DragButton index={rowIndex}/><DragTarget index={rowIndex}/></div>;
 };
 
 const columns = [{

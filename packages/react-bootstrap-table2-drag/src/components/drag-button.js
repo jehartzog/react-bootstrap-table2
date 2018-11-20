@@ -10,9 +10,8 @@ import { Consumer } from '../context';
  */
 const source = {
   beginDrag(props) {
-      console.log('started drag', props);
     return {
-      text: props.text,
+      index: props.index,
       onDragDrop: props.onDragDrop,
     };
   },
@@ -21,10 +20,10 @@ const source = {
         return;
       }
   
-      // When dropped on a compatible target, do something
-      const item = monitor.getItem();
-      const dropResult = monitor.getDropResult();
-      console.log('dropped from source',props, item, dropResult);
+      // // When dropped on a compatible target, do something
+      // const item = monitor.getItem();
+      // const dropResult = monitor.getDropResult();
+      // console.log('dropped from source',props, item, dropResult);
       // props.onDragDrop();
     }
 };
@@ -36,10 +35,10 @@ function collectSource(connect, monitor) {
   };
 }
 
-const Source = ({ isDragging, connectDragSource, text, onDragDrop }) => {
+const Source = ({ isDragging, connectDragSource, onDragDrop }) => {
   return connectDragSource(
     <div style={{ opacity: isDragging ? 0.5 : 1 }}>
-        <p onClick={onDragDrop}>{text}</p>
+        <p onClick={onDragDrop}>SOURCE</p>
     </div>
   );
 }
