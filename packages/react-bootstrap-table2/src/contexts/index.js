@@ -246,7 +246,6 @@ const withContext = Base =>
         <this.DragContext.Provider
           { ...baseProps }
           drag={ this.props.drag }
-          data={ rootProps.getData() }
         >
           { base(rootProps) }
         </this.DragContext.Provider>

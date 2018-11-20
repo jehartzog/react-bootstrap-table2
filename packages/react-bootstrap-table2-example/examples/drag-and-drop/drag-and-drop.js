@@ -15,7 +15,7 @@ const dragFormatter = (cell, row, rowIndex, extraData) => {
 };
 
 const handleDrag = (fromIndex, toIndex) => {
-  console.log('called', fromIndex, toIndex);
+  console.log(`Move row index ${fromIndex} to index ${toIndex}`);
 };
 
 const drag = dragFactory({ 

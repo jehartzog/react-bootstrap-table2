@@ -3,16 +3,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 /* eslint-disable */
 
-    const DragContext = React.createContext();
+const DragContext = React.createContext();
 
 export default (
    _,
 ) => {
-
     class DragProvider extends React.Component {
         static propTypes = {
-            data: PropTypes.array.isRequired,
-            columns: PropTypes.array.isRequired,
             children: PropTypes.node.isRequired,
             drag: PropTypes.shape({
               options: PropTypes.shape({
@@ -28,15 +25,10 @@ export default (
         }
 
         render() {
-            let { data } = this.props;
-
-
             return (
                 <DragContext.Provider
                     value={{
-                        data,
                         onDragDrop: this.handleDragDrop,
-                        otions: {},
                     }}
                 >
                     {this.props.children}
