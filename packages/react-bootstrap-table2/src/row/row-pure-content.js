@@ -26,7 +26,6 @@ export default class RowPureContent extends React.Component {
       onStart,
       clickToEdit,
       dbclickToEdit,
-      handleDragDrop,
       EditingCellComponent,
       tabIndexStart
     } = this.props;
@@ -115,7 +114,6 @@ export default class RowPureContent extends React.Component {
             onStart={ onStart }
             clickToEdit={ clickToEdit }
             dbclickToEdit={ dbclickToEdit }
-            handleDragDrop={ handleDragDrop }
             { ...cellAttrs }
           />
         );

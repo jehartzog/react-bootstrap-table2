@@ -67,7 +67,6 @@ class Cell extends eventDelegater(Component) {
       editable,
       clickToEdit,
       dbclickToEdit,
-      handleDragDrop,
       ...rest
     } = this.props;
     const {
@@ -77,10 +76,6 @@ class Cell extends eventDelegater(Component) {
     } = column;
     const attrs = this.delegate({ ...rest });
     let content = column.isDummyField ? null : _.get(row, dataField);
-
-    if (handleDragDrop) {
-      formatExtraData.handleDragDrop = handleDragDrop;
-    }
 
     if (formatter) {
       content = column.formatter(content, row, rowIndex, formatExtraData);
