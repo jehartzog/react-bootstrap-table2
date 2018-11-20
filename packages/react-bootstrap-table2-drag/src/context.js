@@ -1,45 +1,43 @@
 /* eslint react/require-default-props: 0 */
 import React from 'react';
 import PropTypes from 'prop-types';
-/* eslint-disable */
 
 const DragContext = React.createContext();
 
 export default (
-   _,
+  _,
 ) => {
-    class DragProvider extends React.Component {
-        static propTypes = {
-            children: PropTypes.node.isRequired,
-            drag: PropTypes.shape({
-              options: PropTypes.shape({
-                afterDragDrop: PropTypes.func,
-              }),
-            })
-        }
-
-        handleDragDrop = (fromIndex, toIndex) => {
-            const { afterDragDrop } = this.props.drag.options;
-            // this.props.options.afterDragDrop(fromIndex, toIndex);
-            if (_.isFunction(afterDragDrop)) afterDragDrop(fromIndex, toIndex);
-        }
-
-        render() {
-            return (
-                <DragContext.Provider
-                    value={{
-                        onDragDrop: this.handleDragDrop,
-                    }}
-                >
-                    {this.props.children}
-                </DragContext.Provider>
-            );
-        }
+  class DragProvider extends React.Component {
+    static propTypes = {
+      children: PropTypes.node.isRequired,
+      drag: PropTypes.shape({
+        options: PropTypes.shape({
+          afterDragDrop: PropTypes.func
+        })
+      })
     }
 
-    return {
-        Provider: DragProvider,
-    };
+    handleDragDrop = (fromIndex, toIndex) => {
+      const { afterDragDrop } = this.props.drag.options;
+      if (_.isFunction(afterDragDrop)) afterDragDrop(fromIndex, toIndex);
+    }
+
+    render() {
+      return (
+        <DragContext.Provider
+          value={ {
+            onDragDrop: this.handleDragDrop
+          } }
+        >
+          {this.props.children}
+        </DragContext.Provider>
+      );
+    }
+  }
+
+  return {
+    Provider: DragProvider
+  };
 };
 
 export const Consumer = DragContext.Consumer;
