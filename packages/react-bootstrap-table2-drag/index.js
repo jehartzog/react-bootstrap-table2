@@ -6,8 +6,6 @@ export default (options = {}) => ({
   options
 });
 
-
-export const dragButton = (props = {}) => ({
-  Source: DragButton,
-  props
-});
+export {
+  DragButton
+};

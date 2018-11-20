@@ -7,25 +7,33 @@ import { DRAG_TYPES } from '../const';
 /**
  * Implements the drag source contract.
  */
-const cardSource = {
+const source = {
   beginDrag(props) {
+      console.log('started drag');
     return {
       text: props.text
     };
-  }
+  },
+  endDrag(props, monitor, component) {
+      if (!monitor.didDrop()) {
+        return;
+      }
+  
+      // When dropped on a compatible target, do something
+      const item = monitor.getItem();
+      const dropResult = monitor.getDropResult();
+      console.log('dropped from source',item, dropResult);
+    }
 };
 
-/**
- * Specifies the props to inject into your component.
- */
-function collect(connect, monitor) {
+function collectSource(connect, monitor) {
   return {
     connectDragSource: connect.dragSource(),
     isDragging: monitor.isDragging()
   };
 }
 
-function Card({ isDragging, connectDragSource, text }) {
+const Source = ({ isDragging, connectDragSource, connectDropTarget, text }) => {
   return connectDragSource(
     <div style={{ opacity: isDragging ? 0.5 : 1 }}>
       {text}
@@ -34,4 +42,4 @@ function Card({ isDragging, connectDragSource, text }) {
 }
 
 // Export the wrapped component:
-export default DragSource(DRAG_TYPES.ROW, cardSource, collect)(Card);
+export default DragSource(DRAG_TYPES.ROW, source, collectSource)(Source);
