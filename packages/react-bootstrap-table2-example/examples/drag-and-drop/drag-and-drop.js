@@ -1,21 +1,22 @@
 import React from 'react';
-/* eslint-disable */
-import { DragDropContextProvider } from 'react-dnd';
-import HTML5Backend from 'react-dnd-html5-backend'
-
+import { DragDropContext } from 'react-dnd';
+import HTML5Backend from 'react-dnd-html5-backend';
 import BootstrapTable from 'react-bootstrap-table-next';
-import dragFactory, { dragFormatter } from '../../../react-bootstrap-table2-drag';
+
 import Code from 'components/common/code-block';
 import { productsGenerator } from 'utils/common';
+
+import dragFactory, { dragFormatter } from '../../../react-bootstrap-table2-drag';
 
 const products = productsGenerator();
 
 const handleDrag = (fromIndex, toIndex) => {
+  // eslint-disable-next-line no-console
   console.log(`Move row index ${fromIndex} to index ${toIndex}`);
 };
 
-const drag = dragFactory({ 
-  afterDragDrop: handleDrag,
+const drag = dragFactory({
+  afterDragDrop: handleDrag
 });
 
 const columns = [{
@@ -25,9 +26,6 @@ const columns = [{
   dataField: 'name',
   text: 'Product Name'
 }, {
-  dataField: 'price',
-  text: 'Product Price'
-}, {
   dataField: 'drag',
   text: 'Order rows',
   isDummyField: true,
@@ -35,7 +33,18 @@ const columns = [{
 }];
 
 const sourceCode = `\
+import { DragDropContext } from 'react-dnd';
+import HTML5Backend from 'react-dnd-html5-backend';
 import BootstrapTable from 'react-bootstrap-table-next';
+import dragFactory, { dragFormatter } from 'react-bootstrap-table2-drag';
+
+const handleDrag = (fromIndex, toIndex) => {
+  // Handle the row drag
+};
+
+const drag = dragFactory({
+  afterDragDrop: handleDrag
+});
 
 const columns = [{
   dataField: 'id',
@@ -44,18 +53,24 @@ const columns = [{
   dataField: 'name',
   text: 'Product Name'
 }, {
-  dataField: 'price',
-  text: 'Product Price'
+  dataField: 'drag',
+  text: 'Order rows',
+  isDummyField: true,
+  formatter: dragFormatter
 }];
 
-<BootstrapTable keyField='id' data={ products } columns={ columns } />
+const App = () => (
+  <BootstrapTable keyField="id" data={ products } columns={ columns } drag={drag} />
+);
+
+export default DragDropContext(HTML5Backend)(App);
 `;
 
-export default () => (
+const App = () => (
   <div>
-      <DragDropContextProvider backend={HTML5Backend}>
-        <BootstrapTable keyField="id" data={ products } columns={ columns } drag={drag} />
-      </DragDropContextProvider>
+    <BootstrapTable keyField="id" data={ products } columns={ columns } drag={ drag } />
     <Code>{ sourceCode }</Code>
   </div>
 );
+
+export default DragDropContext(HTML5Backend)(App);
