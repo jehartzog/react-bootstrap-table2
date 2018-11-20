@@ -1,4 +1,4 @@
-import DragButton from './src/components/drag-button';
+import DragSource from './src/components/drag-source';
 import DragTarget from './src/components/drag-target';
 import DragCell from './src/components/drag-cell';
 import dragFormatter from './src/components/drag-formatter';
@@ -10,7 +10,7 @@ export default (options = {}) => ({
 });
 
 export {
-  DragButton,
+  DragSource,
   DragTarget,
   DragCell,
   dragFormatter
