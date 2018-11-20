@@ -3,8 +3,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 /* eslint-disable */
 
-export default () => {
     const DragContext = React.createContext();
+
+export default () => {
 
     class DragProvider extends React.Component {
         static propTypes = {
@@ -14,7 +15,7 @@ export default () => {
         }
 
         handleDragDrop = opts => {
-            console.log(opts);
+            console.log('CALLED', opts);
         }
 
         render() {
@@ -35,6 +36,7 @@ export default () => {
 
     return {
         Provider: DragProvider,
-        Consumer: DragContext.Consumer
     };
 };
+
+export const Consumer = DragContext.Consumer;

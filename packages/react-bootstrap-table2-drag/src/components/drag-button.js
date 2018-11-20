@@ -2,6 +2,7 @@ import React from 'react';
 import { DragSource } from 'react-dnd';
 
 import { DRAG_TYPES } from '../const';
+import { Consumer } from '../context';
 
 /* eslint-disable */
 /**
@@ -34,12 +35,21 @@ function collectSource(connect, monitor) {
 }
 
 const Source = ({ isDragging, connectDragSource, connectDropTarget, text }) => {
+  console.log(Consumer);
   return connectDragSource(
     <div style={{ opacity: isDragging ? 0.5 : 1 }}>
-      {text}
+      <Consumer>
+        { ({ onDragDrop }) => <p onClick={onDragDrop}>Thing</p> }
+      </Consumer>
     </div>
   );
 }
+
+const ProvideContext = (
+  <Consumer>
+    <Source />
+  </Consumer>
+);
 
 // Export the wrapped component:
 export default DragSource(DRAG_TYPES.ROW, source, collectSource)(Source);
